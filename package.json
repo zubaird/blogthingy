@@ -1,0 +1,29 @@
+{
+  "name": "zubaird.github.io",
+  "version": "1.0.0",
+  "description": "my blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "bin/compile.sh",
+    "compile-posts": "bin/compile-posts.sh",
+    "make-post": "bin/make-post.sh",
+    "init": "bin/init.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zubaird/zubaird.github.io.git"
+  },
+  "keywords": [
+    "blogs"
+  ],
+  "author": "Zubair Desai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zubaird/zubaird.github.io/issues"
+  },
+  "homepage": "https://github.com/zubaird/zubaird.github.io#readme",
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  }
+}
