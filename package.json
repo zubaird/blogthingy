@@ -8,6 +8,8 @@
     "compile": "bin/compile.sh",
     "compile-posts": "bin/compile-posts.sh",
     "make-post": "bin/make-post.sh",
+    "beefy": "bin/beefy.sh",
+    "md-to-html": "bin/md-to-html.sh",
     "init": "bin/init.sh"
   },
   "repository": {
@@ -24,6 +26,8 @@
   },
   "homepage": "https://github.com/zubaird/zubaird.github.io#readme",
   "dependencies": {
-    "handlebars": "^4.0.5"
+    "glob": "^7.0.5",
+    "handlebars": "^4.0.5",
+    "markdown-to-html": "0.0.11"
   }
 }

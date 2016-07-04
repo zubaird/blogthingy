@@ -7,13 +7,18 @@ var Site = require('./site');
 var hbHelpers = require('./templateLoadHelpers');
 
 window.onload = function() {
-
-  var template = hbHelpers.load( ['index', 'head', 'post','1467577467000_somePost'] )
+  var template = hbHelpers.loadAll();
 
   hbHelpers.loadDomWith('head', template.Head, {title:'It\'s a Blog!'})
   hbHelpers.loadDomWith('#header', template.Index, {title:'======'})
-  hbHelpers.loadDomWith('#header', template["1467577467000_somePost"], {title:'AY'})
+  hbHelpers.loadDomWith('.main', template.Posts, {})
+  hbHelpers.loadPosts(4,'.posts', template)
 }
+
+
+// store posts data
+// load all templates
+// render posts
 
 },{"./site":2,"./templateLoadHelpers":3,"./templates/posts.js":4,"./templates/template.js":5,"handlebars":35}],2:[function(require,module,exports){
 module.exports = {
@@ -27,23 +32,64 @@ var Handlebars = require('handlebars');
 module.exports = {
 
   loadDomWith: function(query, template,templateData) {
+    var templateData = templateData || {};
     document.querySelectorAll(query)[0].innerHTML = template(templateData);
+  },
+
+  appendDomWith: function(query, template,templateData) {
+    var templateData = templateData || {};
+    var currentContent = document.querySelectorAll(query)[0].innerHTML
+    document.querySelectorAll(query)[0].innerHTML = currentContent += template(templateData);
   },
 
   capitalize: function(word) {
     return word[0].toUpperCase() + word.slice(1,word.length);
   },
 
-  load: function(templateList) {
+  loadAll: function() {
     var templatesObj = {};
-    console.log( templateList[1] );
-    console.log( this.capitalize(templateList[1]) );
+    var templateList = this.templateList();
 
     for (var i = 0; i < templateList.length; i++) {
-      templatesObj[ this.capitalize( templateList[i] ) ] = Handlebars.templates[ templateList[i] ];
+      var templateKey = this.capitalize( templateList[i]);
+      templatesObj[ templateKey  ] = Handlebars.templates[ templateList[i] ];
     }
 
     return templatesObj;
+  },
+
+  templateList: function(){
+    return Object.keys(Handlebars.templates);
+  },
+
+  postList: function(){
+    var postNames = [];
+    var templateList = this.templateList();
+
+    for (var i = 0; i < templateList.length; i++) {
+      if (templateList[i].search("_") !== -1) {
+        postNames.push(templateList[i]);
+      }
+    }
+
+    return postNames;
+  },
+
+  loadPosts: function(numberOfPosts, query, template) {
+    var postList = this.postList();
+    var postCount;
+
+    if (postList.length > numberOfPosts ) {
+      postCount = numberOfPosts;
+    } else {
+      postCount = postList.length;
+    }
+
+    for (var i = 0; i < postCount; i++) {
+      var post = postList[i]
+      this.appendDomWith(query, template[post]);
+    }
+
   }
 }
 
@@ -52,12 +98,65 @@ var Handlebars = require('handlebars');
 module.exports=
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['1467577467000_somePost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+templates['1467611648000_yetAnotherAwsomePost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "# "
+  return "<h1 id=\"-title-\">"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"title","hash":{},"data":data}) : helper)))
-    + "\n";
+    + "</h1>\n<h3 id=\"a-blog-maker-for\">A blog maker for</h3>\n<ul>\n<li>Easy templating</li>\n<li>Markdown posts with Handbars ...because!</li>\n<li>Generators</li>\n</ul>\n<h3 id=\"get-started\">Get started</h3>\n<ul>\n<li>Update this file: <code>./javascripts/site.js</code> with your information, then run: <code>npm run-script init</code></li>\n<li>Write your first post: <code>npm run-script make-post helloWorld!</code></li>\n<li>Turn it to HTML: <code>npm run-script compile-posts</code></li>\n<li>Read it: <code>npm run-script beefy</code></li>\n<li>Profit: (Let me know once you&#39;ve figured that part out!)</li>\n</ul>\n<h3 id=\"commands\">Commands</h3>\n<p>  <code>npm run-script [command]</code></p>\n<ul>\n<li>compile: Compiles handlebars templates in the <code>./javascripts/templates</code> directory</li>\n<li>compile-posts: Turn markdown posts to HTML, then compiles any handlebars e.g. <code>{{ }}</code> inside.</li>\n<li>make-post [POST NAME]: Generates a blank markdown post in <code>./posts</code> with a timestamp.</li>\n<li>beefy: Watches working directory</li>\n<li>md-to-html:</li>\n<li>init: Init based on site.js config</li>\n</ul>\n<h3 id=\"uses\">Uses</h3>\n<ul>\n<li>Browserify (dealing with multiple JS files)</li>\n<li>Watchify (watcher to update bundle.js on JS file changes)</li>\n<li>Beefy (watch index.html for changes and serve locally)</li>\n<li>Handlebars (templating and partials)</li>\n</ul>\n";
+},"useData":true});
+templates['1467612947000_DayZ'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1 id=\"title\">Title</h1>\n<h3 id=\"fo-realz\">Fo Realz</h3>\n";
+},"useData":true});
+templates['1467638366000_soHeresAnotherOne'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1 id=\"title\">Title</h1>\n<h3 id=\"that-was-a-lot-of-links\">That was a lot of links</h3>\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n";
+},"useData":true});
+templates['1467639894000_thisWasWayTooAwesome'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<h1 id=\"title\">Title</h1>\n<p><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong><br><strong>this was going to be another "
+    + alias4(((helper = (helper = helpers.post || (depth0 != null ? depth0.post : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"post","hash":{},"data":data}) : helper)))
+    + "</strong></p>\n";
 },"useData":true});
 })();
 
@@ -82,8 +181,8 @@ templates['index'] = template({"compiler":[7,">= 4.0.0"],"main":function(contain
     + alias4(((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data}) : helper)))
     + "\n  </div>\n</div>\n";
 },"useData":true});
-templates['post'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "";
+templates['posts'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"posts\"></div>\n";
 },"useData":true});
 })();
 

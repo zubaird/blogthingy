@@ -18,7 +18,7 @@ templates['index'] = template({"compiler":[7,">= 4.0.0"],"main":function(contain
     + alias4(((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data}) : helper)))
     + "\n  </div>\n</div>\n";
 },"useData":true});
-templates['post'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "";
+templates['posts'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"posts\"></div>\n";
 },"useData":true});
 })();
