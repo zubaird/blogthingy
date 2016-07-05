@@ -8,16 +8,16 @@
 
 ### Get started
 
-  - Update this file: `./javascripts/site.js` with your information, then run: `npm run-script init`
-  - Write your first post: `npm run-script make-post helloWorld!`
-  - Turn it to HTML: `npm run-script compile-posts`
-  - Read it: `npm run-script beefy`
+  - Update this file: `./javascripts/site.js` with your information, then run: `npm run init`
+  - Write your first post: `npm run make-post helloWorld!`
+  - Turn it to HTML: `npm run compile-posts`
+  - Read it: `npm run beefy`
   - Profit: (Let me know once you've figured that part out!)
 
 
 ### Commands
 
-  `npm run-script [command]`
+  `npm run [command]`
 
   - compile: Compiles handlebars templates in the `./javascripts/templates` directory
   - compile-posts: Turn markdown posts to HTML, then compiles any handlebars e.g. `{{ }}` inside.
