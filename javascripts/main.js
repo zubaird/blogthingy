@@ -14,10 +14,3 @@ window.onload = function() {
   console.log(posts);
   hbHelpers.loadDomWith('.main', template.Posts, {posts:posts, test:'test'});
 }
-
-
-// publish post
-  // add to list and sort by date
-
-// remove post
-  // remove from list

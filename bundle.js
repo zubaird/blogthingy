@@ -16,13 +16,6 @@ window.onload = function() {
   hbHelpers.loadDomWith('.main', template.Posts, {posts:posts, test:'test'});
 }
 
-
-// publish post
-  // add to list and sort by date
-
-// remove post
-  // remove from list
-
 },{"./site":2,"./templateLoadHelpers":3,"./templates/posts.js":4,"./templates/template.js":5,"handlebars":35}],2:[function(require,module,exports){
 module.exports = {
   title: 'It\'s a Blog!',
