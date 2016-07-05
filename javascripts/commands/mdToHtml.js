@@ -41,7 +41,7 @@ function convertFile(length,files, md){
         if (err == "Error: ENOENT: no such file or directory, open 'finished!'") {
           process.exit();
         }
-        console.log('>>>' + err);
+        console.log('>>>Error:' + err);
         process.exit();
       }
 
@@ -53,6 +53,37 @@ function convertFile(length,files, md){
 
       console.log('Creating:',path.normalize(directree));
 
+      fs.readFile(fileName, 'utf8',function(err,data) {
+        if (err) {
+          throw err;
+        }
+        console.log(data);
+        fs.readFile('./postsList.json',function(err,data){
+          console.log('test');
+          if (err) {
+            throw err;
+          }
+
+          var postsData = JSON.parse(data)
+          for (var i = 0; i < postsData.posts.length; i++) {
+
+            if ( postsData.posts[i].name.search(post) ) {
+              console.log('POST INFO:',postsData.posts[i]);
+              postsData.posts[i].content = content
+              var writableData = JSON.stringify(postsData);
+
+              fs.writeFile('./postsList.json', writableData, function(err){
+                if (err) {
+                  throw err;
+                }
+              })
+
+            }
+
+          }
+        })
+      })
+
       fs.writeFile(path.normalize(directree),'',function(err){
         if (err) {
           throw err;
@@ -62,5 +93,36 @@ function convertFile(length,files, md){
       });
 
     });
+
+}
+
+function writeContentToPostsList(post, content) {
+  console.log('NeFILE',post);
+
+  fs.readFile('./postsList.json',function(err,data){
+    console.log('test');
+    if (err) {
+      throw err;
+    }
+
+    var postsData = JSON.parse(data)
+    for (var i = 0; i < postsData.posts.length; i++) {
+
+      if ( postsData.posts[i].name.search(post) ) {
+        console.log('POST INFO:',postsData.posts[i]);
+        postsData.posts[i].content = content
+        var writableData = JSON.stringify(postsData);
+        fs.writeFile(thisFile, writableData, function(err){
+          if (err) {
+            throw err;
+          }
+        })
+      }
+
+    }
+
+
+
+  })
 
 }

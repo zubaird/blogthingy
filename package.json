@@ -10,6 +10,7 @@
     "make-post": "bin/make-post.sh",
     "beefy": "bin/beefy.sh",
     "md-to-html": "bin/md-to-html.sh",
+    "publish-post": "bin/publish-post.sh",
     "init": "bin/init.sh"
   },
   "repository": {

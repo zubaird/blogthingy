@@ -46,7 +46,7 @@ module.exports = {
     return postNames;
   },
 
-  loadPosts: function(numberOfPosts, query, template) {
+  loadPosts: function(numberOfPosts, template) {
     var postList = this.postList();
     var postCount;
 
@@ -56,10 +56,13 @@ module.exports = {
       postCount = postList.length;
     }
 
+    var postContent = [];
+
     for (var i = 0; i < postCount; i++) {
       var post = postList[i]
-      this.appendDomWith(query, template[post]);
+      postContent.push( template[post]() )
     }
 
+    return postContent;
   }
 }
