@@ -9,6 +9,7 @@
     "compile-posts": "bin/compile-posts.sh",
     "draft-post": "bin/make-post.sh",
     "beefy": "bin/beefy.sh",
+    "draft-post": "bin/draft-post.sh",
     "publish-post": "bin/publish-post.sh",
     "init": "bin/init.sh"
   },
