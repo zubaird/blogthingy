@@ -1,4 +1,4 @@
 module.exports = {
-  title: "This is a title",
+  title: 'It\'s a Blog!',
   keywords: "blogs, technology, coding"
 }

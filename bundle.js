@@ -10,18 +10,12 @@ window.onload = function() {
   var template = hbHelpers.loadAll();
   var posts = hbHelpers.loadPosts(4, template)
 
-  hbHelpers.loadDomWith('head', template.Head, {title:'It\'s a Blog!'});
+  hbHelpers.loadDomWith('head', template.Head, {title: Site.title });
   hbHelpers.loadDomWith('#header', template.Index, {title:"posts"});
   console.log(posts);
   hbHelpers.loadDomWith('.main', template.Posts, {posts:posts, test:'test'});
 }
 
-
-// store posts data
-
-// load all templates (DONE)
-
-// render posts if published
 
 // publish post
   // add to list and sort by date
@@ -29,11 +23,9 @@ window.onload = function() {
 // remove post
   // remove from list
 
-// draft post
-
 },{"./site":2,"./templateLoadHelpers":3,"./templates/posts.js":4,"./templates/template.js":5,"handlebars":35}],2:[function(require,module,exports){
 module.exports = {
-  title: "This is a title",
+  title: 'It\'s a Blog!',
   keywords: "blogs, technology, coding"
 }
 
@@ -112,8 +104,8 @@ var Handlebars = require('handlebars');
 module.exports=
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['1467668882000_superTestPost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1 id=\"title\">Title</h1>\n";
+templates['1467727938000_testpost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Title</h1>\n\n<h2>BOOOM</h2>\n\n<h2>COOLIE</h2>\n\n<h2>more stuff</h2>";
 },"useData":true});
 })();
 

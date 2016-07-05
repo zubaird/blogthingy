@@ -1,7 +1,8 @@
-var Markdown = require('markdown-to-html').Markdown;
+var markdown = require( 'markdown' ).markdown;
 var fs = require('fs');
 var path = require('path');
-
+var Handlebars = require('handlebars');
+var postHelpers = require('../post_helpers');
 var postName = process.argv[2];
 
 publishPost(postName, postToHTML);
@@ -52,82 +53,26 @@ function handleError(err) {
 }
 
 function postToHTML(postInfoObject){
-    var md = new Markdown();
-    var mdPostName = postInfoObject.post.name
+    var mdPostName = postInfoObject.post.name;
     var mdFile = './posts/'+ mdPostName;
-    md.bufmax = 2048;
-
-    // Write a header.
-    console.log('=====BEGIN WRITING TO HTML=======');
-    console.log('working on:', mdFile);
-
-    // Write a trailer at eof.
-    md.once('end', function() {
-      console.log('=====TASK COMPLETE=======');
-      process.exit();
-    });
-
-    // var opts = {title: 'File $BASENAME in $DIRNAME', stylesheet: 'test/style.css'};
-    md.render(mdFile, {}, function(err) {
-
-      if (err) {
-        console.log('>>>Error:' + err);
-        process.exit();
-      }
-
-      htmlName = mdPostName.slice(0,mdPostName.length-3)
-
-      var directree = path.format({
+    var basePostName = mdPostName.slice(0,mdPostName.length-3);
+    var directree = path.format({
                         dir: './posts/html',
-                        base: htmlName +'.html',
+                        base: basePostName +'.html',
                       });
+    var htmlPath = path.normalize(directree)
 
-      console.log('Creating:',path.normalize(directree));
+    console.log('Creating:',path.normalize(directree));
 
-      var htmlpath = path.normalize(directree)
+    // process handlebars
 
-      fs.writeFile(htmlpath,'this is stuff',function(err){
-        if (err) {
-          throw err;
-        }
-        var writeSteam =  fs.createWriteStream(htmlpath);
-        md.pipe(writeSteam);
-        md.pipe(process.stdout);
+
+
+    fs.readFile(mdFile,'utf8',function(err,data){
+      var template = Handlebars.compile(data)(postHelpers);
+      var htmlContent = markdown.toHTML(template);
+      fs.writeFile(htmlPath,htmlContent,function(err){
+        handleError(err);
       });
-
-    });
+    })
 }
-
-
-
-//
-// function writeContentToPostsList(post, content) {
-//   console.log('NeFILE',post);
-//
-//   fs.readFile('./postsList.json',function(err,data){
-//     console.log('test');
-//     if (err) {
-//       throw err;
-//     }
-//
-//     var postsData = JSON.parse(data)
-//     for (var i = 0; i < postsData.posts.length; i++) {
-//
-//       if ( postsData.posts[i].name.search(post) ) {
-//         console.log('POST INFO:',postsData.posts[i]);
-//         postsData.posts[i].content = content
-//         var writableData = JSON.stringify(postsData);
-//         fs.writeFile(thisFile, writableData, function(err){
-//           if (err) {
-//             throw err;
-//           }
-//         })
-//       }
-//
-//     }
-//
-//
-//
-//   })
-//
-// }

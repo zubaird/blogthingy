@@ -7,9 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "bin/compile.sh",
     "compile-posts": "bin/compile-posts.sh",
-    "make-post": "bin/make-post.sh",
+    "draft-post": "bin/make-post.sh",
     "beefy": "bin/beefy.sh",
-    "md-to-html": "bin/md-to-html.sh",
     "publish-post": "bin/publish-post.sh",
     "init": "bin/init.sh"
   },
@@ -28,7 +27,6 @@
   "homepage": "https://github.com/zubaird/zubaird.github.io#readme",
   "dependencies": {
     "glob": "^7.0.5",
-    "handlebars": "^4.0.5",
-    "markdown-to-html": "0.0.11"
+    "handlebars": "^4.0.5"
   }
 }
