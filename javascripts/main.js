@@ -11,6 +11,9 @@ window.onload = function() {
 
   hbHelpers.loadDomWith('head', template.Head, {title: Site.title });
   hbHelpers.loadDomWith('#header', template.Index, {title:"posts"});
-  console.log(posts);
   hbHelpers.loadDomWith('.main', template.Posts, {posts:posts, test:'test'});
 }
+
+
+// list posts
+// preview post

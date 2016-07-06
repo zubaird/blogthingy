@@ -3,6 +3,7 @@ var fs = require('fs');
 var name = process.argv[2];
 var stamp = makeTimestamp()
 var stampedName = stampedName(name);
+var content;
 
 function stampedName(postName) {
   return stamp + "_" + postName + ".md"
@@ -24,8 +25,10 @@ function writeToPostsList(thisFile) {
       name: stampedName,
       content: "",
       date: new Date(stamp),
-      published: false
-    })
+      published: false,
+      categories: []
+    });
+
     var writableData = JSON.stringify(postsData);
     fs.writeFile(thisFile, writableData, function(err){
       if (err) {
@@ -36,7 +39,7 @@ function writeToPostsList(thisFile) {
   })
 }
 
-var content = '# Title';
+content = "# Title \n*Published on: {{publishedDateFor '" + name + "'}}*\n"
 
 fs.writeFile(fullPath('./posts/'), content);
 

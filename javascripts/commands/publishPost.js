@@ -108,7 +108,7 @@ function addPublishedToJSONList(postInfoObject) {
 
       console.log('SEARCHING:', postInfoObject.name)
       findPostFromList(postInfoObject.name,posts,function(post,index){
-        posts[index].published = Date.parse( new Date() );
+        posts[index].published = new Date().toString();
       })
 
       console.log('SORTING: postList.json by published date')

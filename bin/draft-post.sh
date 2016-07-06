@@ -1,1 +1,1 @@
-node ./javascripts/commands/buildPost.js $1
+node ./javascripts/commands/draftPost.js $1
