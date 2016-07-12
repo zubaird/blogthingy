@@ -11,13 +11,15 @@ window.onload = function() {
   var posts = hbHelpers.loadPosts(4, template)
 
   hbHelpers.loadDomWith('head', template.Head, {title: Site.title });
-  hbHelpers.loadDomWith('#header', template.Index, {title:"posts"});
+  hbHelpers.loadDomWith('#header', template.Index);
+  hbHelpers.loadDomWith('#sidebar', template.Sidebar);
   hbHelpers.loadDomWith('.main', template.Posts, {posts:posts, test:'test'});
 }
 
 
 // list posts
 // preview post
+// add compiled templates folder
 
 },{"./site":2,"./templateLoadHelpers":3,"./templates/posts.js":4,"./templates/template.js":5,"handlebars":35}],2:[function(require,module,exports){
 module.exports = {
@@ -100,11 +102,14 @@ var Handlebars = require('handlebars');
 module.exports=
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['1467774192000_boom'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Boom</h1>\n\n<p> Published on: Tue Jul 05 2016 20:10:52 GMT-0700 (PDT)</p>";
+templates['1468253461000_somePost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Title</h1>\n\n<p><em>Published on: false</em></p>\n\n<h1>blah blah blah</h1>";
 },"useData":true});
-templates['1467774366000_boom2'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Boom 2</h1>\n\n<p> <em>Published on: Tue Jul 05 2016 20:10:50 GMT-0700 (PDT)</em></p>";
+templates['1468352932000_anotherPost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Title</h1>\n\n<p><em>Published on: false</em></p>";
+},"useData":true});
+templates['1468353428000_postNumeroDos'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Title</h1>\n\n<p><em>Published on: false</em></p>";
 },"useData":true});
 })();
 
@@ -141,6 +146,9 @@ templates['posts'] = template({"1":function(container,depth0,helpers,partials,da
   return "<div class=\"posts\">\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.posts : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n";
+},"useData":true});
+templates['sidebar'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<aside class=\"sidebar\">\n  sidebar\n</aside>\n";
 },"useData":true});
 })();
 

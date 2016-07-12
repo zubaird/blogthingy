@@ -10,10 +10,12 @@ window.onload = function() {
   var posts = hbHelpers.loadPosts(4, template)
 
   hbHelpers.loadDomWith('head', template.Head, {title: Site.title });
-  hbHelpers.loadDomWith('#header', template.Index, {title:"posts"});
+  hbHelpers.loadDomWith('#header', template.Index);
+  hbHelpers.loadDomWith('#sidebar', template.Sidebar);
   hbHelpers.loadDomWith('.main', template.Posts, {posts:posts, test:'test'});
 }
 
 
 // list posts
 // preview post
+// add compiled templates folder

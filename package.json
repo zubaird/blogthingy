@@ -8,6 +8,7 @@
     "compile": "bin/compile.sh",
     "compile-posts": "bin/compile-posts.sh",
     "beefy": "bin/beefy.sh",
+    "watchify": "bin/watchify.sh",
     "draft-post": "bin/draft-post.sh",
     "publish-post": "bin/publish-post.sh",
     "remove-post": "bin/remove-post.sh",

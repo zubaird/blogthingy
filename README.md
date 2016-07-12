@@ -9,8 +9,8 @@
 ### Get started
 
   - Update this file: `./javascripts/site.js` with your information, then run: `npm run init`
-  - Write your first post: `npm run make-post helloWorld!`
-  - Turn it to HTML: `npm run compile-posts`
+  - Write your first post: `npm run draft-post helloWorld!`
+  - Turn it to HTML: `npm run publish-post helloWorld`
   - Read it: `npm run beefy`
   - Profit: (Let me know once you've figured that part out!)
 

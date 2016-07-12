@@ -2,10 +2,13 @@ var Handlebars = require('handlebars');
 module.exports=
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['1467774192000_boom'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Boom</h1>\n\n<p> Published on: Tue Jul 05 2016 20:10:52 GMT-0700 (PDT)</p>";
+templates['1468253461000_somePost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Title</h1>\n\n<p><em>Published on: false</em></p>\n\n<h1>blah blah blah</h1>";
 },"useData":true});
-templates['1467774366000_boom2'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Boom 2</h1>\n\n<p> <em>Published on: Tue Jul 05 2016 20:10:50 GMT-0700 (PDT)</em></p>";
+templates['1468352932000_anotherPost'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Title</h1>\n\n<p><em>Published on: false</em></p>";
+},"useData":true});
+templates['1468353428000_postNumeroDos'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Title</h1>\n\n<p><em>Published on: false</em></p>";
 },"useData":true});
 })();
