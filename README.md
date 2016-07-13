@@ -1,4 +1,9 @@
-# BlogThingy
+
+-----------------
+# This is a work in process
+-----------------
+
+## Blingy
 
 ### A blog maker for
 
@@ -9,21 +14,24 @@
 ### Get started
 
   - Update this file: `./javascripts/site.js` with your information, then run: `npm run init`
-  - Write your first post: `npm run draft-post helloWorld!`
-  - Turn it to HTML: `npm run publish-post helloWorld`
-  - Read it: `npm run beefy`
-  - Profit: (Let me know once you've figured that part out!)
 
+  - Write your first post: `npm run draft-post helloWorld!`
+    - Find it in `posts/helloWorld!.md`, and add some markdown.
+
+  - Turn it to HTML: `npm run publish-post helloWorld`
+
+  - View it locally: `npm run beefy`
+
+  - Profit: (Let me know once you've figured that part out!)
 
 ### Commands
 
   `npm run [command]`
 
   - compile: Compiles handlebars templates in the `./javascripts/templates` directory
-  - compile-posts: Turn markdown posts to HTML, then compiles any handlebars e.g. `{{ }}` inside.
-  - make-post [POST NAME]: Generates a blank markdown post in `./posts` with a timestamp.
+  - draft-post [POST NAME]: Generates a blank markdown post in `./posts` with a timestamp.
+  - pubish-post: turns post to HTML, compiles any handlebars, and publishes it.
   - beefy: Watches working directory
-  - md-to-html:
   - init: Init based on site.js config
 
 ### Uses
@@ -32,3 +40,4 @@
   - Watchify (watcher to update bundle.js on JS file changes)
   - Beefy (watch index.html for changes and serve locally)
   - Handlebars (templating and partials)
+  - Markdown to html

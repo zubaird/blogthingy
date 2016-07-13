@@ -6,12 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "bin/compile.sh",
-    "compile-posts": "bin/compile-posts.sh",
     "beefy": "bin/beefy.sh",
     "watchify": "bin/watchify.sh",
     "draft-post": "bin/draft-post.sh",
     "publish-post": "bin/publish-post.sh",
     "remove-post": "bin/remove-post.sh",
+    "list-posts": "bin/list-posts.sh",
     "init": "bin/init.sh"
   },
   "repository": {
