@@ -25,10 +25,12 @@ module.exports = {
   publishedDateFor:function(postName) {
     console.log(postName);
     var publishedDate;
+
     findPostFromList(postName,postList.posts,function(post,index) {
       console.log(post);
        publishedDate = post.published;
     })
+    
     var date = publishedDate
     console.log('PUBLISHED DATE:',publishedDate);
     return date;

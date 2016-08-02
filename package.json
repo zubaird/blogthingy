@@ -1,7 +1,7 @@
 {
-  "name": "zubaird.github.io",
-  "version": "1.0.0",
-  "description": "my blog",
+  "name": "blingy",
+  "version": "1.0.01",
+  "description": "build blogs with MD and JavaScript!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zubaird/zubaird.github.io.git"
+    "url": "git@github.com:zubaird/blogthingy.git"
   },
   "keywords": [
     "blogs"
@@ -24,9 +24,9 @@
   "author": "Zubair Desai",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zubaird/zubaird.github.io/issues"
+    "url": "https://github.com/zubaird/blogthingy/issues"
   },
-  "homepage": "https://github.com/zubaird/zubaird.github.io#readme",
+  "homepage": "https://github.com/zubaird/blogthingy#readme",
   "dependencies": {
     "glob": "^7.0.5",
     "handlebars": "^4.0.5"

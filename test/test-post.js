@@ -1,6 +1,7 @@
 'use strict'
 
 const expect = require('chai').expect;
+const assert = require('chai').assert;
 const Post = require('../javascripts/Post');
 const Helpers = require('./helpers.js')
 
@@ -8,11 +9,12 @@ describe('Post', function() {
 
   let contents;
   let err = false;
-  let post;
+  let mockPost;
 
   before( done => {
      Post.newDraft('mockPost').then( (err) => {
        Post.find('mockPost').then(function(post) {
+         mockPost = post;
          let fileName = "./posts/" + post.name
 
          Helpers.readFile(fileName).then( data => {
@@ -53,19 +55,44 @@ describe('Post', function() {
   });
 
   describe('#all', () => {
-    it('should return all the posts', function() {
-
-      let allPosts = [ { name: '1469566234000_mockPost.md',
+    it('should include the latest post', function(done) {
+      let newPost =  { name: '1470101509000_mockPost.md',
                         content: '',
-                        date: '2016-07-26T20:50:34.000Z',
+                        date: '2016-08-02T01:31:49.000Z',
                         published: false,
                         categories: []
-                      } ]
+                    }
 
       Post.all().then( (posts) => {
-        expect(posts).to.equal(allPosts);
-      })
+         try {
+           console.log(posts);
+           let lastPost = posts[posts.length -1];
+
+           expect(lastPost.name).to.equal(mockPost.name)
+           done();
+         } catch( e ) {
+           done( e );
+         }
+       }).catch( (err) => {
+         assert.fail(err)
+         done();
+       })
+
     });
   })
+
+  xdescribe("#publishPost", function() {
+    it('makes the published status true in postList.json', function() {
+      let publishedPost = { name: '1469566234000_mockPost.md',
+                        content: '',
+                        date: '2016-07-26T20:50:34.000Z',
+                        published: true,
+                        categories: []
+                      }
+      expect().to.equal();
+    });
+  });
+
+
 
 });
