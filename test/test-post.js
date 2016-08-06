@@ -3,7 +3,8 @@
 const expect = require('chai').expect;
 const assert = require('chai').assert;
 const Post = require('../javascripts/Post');
-const Helpers = require('./helpers.js')
+const Helpers = require('./helpers.js');
+const fs = require('fs');
 
 describe('Post', function() {
 
@@ -46,10 +47,9 @@ describe('Post', function() {
 
     it('should have starting content', function() {
       let title = "# Title";
-      let dateViewHelper = '{{publishedDateFor';
+      let dateViewHelper = '{{date}}';
 
       expect(contents).to.include(title);
-      expect(contents).to.include('mockPost');
       expect(contents).to.include(dateViewHelper);
     });
   });
@@ -65,13 +65,11 @@ describe('Post', function() {
 
       Post.all().then( (posts) => {
          try {
-           console.log(posts);
            let lastPost = posts[posts.length -1];
-
            expect(lastPost.name).to.equal(mockPost.name)
            done();
-         } catch( e ) {
-           done( e );
+         } catch(err) {
+           done(e);
          }
        }).catch( (err) => {
          assert.fail(err)
@@ -81,18 +79,50 @@ describe('Post', function() {
     });
   })
 
-  xdescribe("#publishPost", function() {
-    it('makes the published status true in postList.json', function() {
-      let publishedPost = { name: '1469566234000_mockPost.md',
-                        content: '',
-                        date: '2016-07-26T20:50:34.000Z',
-                        published: true,
-                        categories: []
-                      }
-      expect().to.equal();
+  describe("#addToPostsList", function() {
+    it('makes the published status true in postList.json', function(done) {
+      Post.addToPostsList('mockPost').then( (published)=> {
+        try {
+          expect(published).to.not.equal(false);
+          done();
+        } catch (err) {
+          done(err)
+        }
+      })
+
     });
   });
 
+  describe("#toHTML", function() {
+    it('turns a MD post to HTMl', function(done) {
+      Post.toHTML('mockPost').then( (html)=> {
+        try {
+          expect(html).to.include('<h1>');
+          done();
+        } catch (err) {
+          done(err)
+        }
+      })
+    });
+  });
+
+  describe("#unpublish", function() {
+    it('deletes the HTML and sets published to false', function(done) {
+      let normalizedName = mockPost.name.slice(0,mockPost.name.length-3)
+      Post.unpublish('mockPost').then( (content)=> {
+        try {
+          fs.readFile(`./posts/html/${normalizedName}.html`,'utf8', (err, data)=> {
+            expect(JSON.parse(content).posts[0].published).to.equal(false);
+            expect(data).to.equal(undefined);
+            expect(err.errno).to.equal(-2);
+            done();
+          })
+        } catch (err) {
+          done(err)
+        }
+      })
+    });
+  });
 
 
 });

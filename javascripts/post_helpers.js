@@ -1,9 +1,4 @@
 var fs = require('fs');
-var postList;
-
-fs.readFile('./postsList.json','utf8',function(err,data) {
-  postList = JSON.parse(data);
-})
 
 function removeTimestampAndType(name) {
   const NAMEMATCH = /_([^\.]+)/
@@ -20,19 +15,36 @@ function findPostFromList(name,list,cb) {
   }
 }
 
+var helpers = {};
 
 module.exports = {
-  publishedDateFor:function(postName) {
-    console.log(postName);
-    var publishedDate;
+  publishedDateFor: function(postName) {
 
-    findPostFromList(postName,postList.posts,function(post,index) {
-      console.log(post);
-       publishedDate = post.published;
+    return new Promise( (resolve, reject)=> {
+
+      fs.readFile('./postsList.json','utf8',function(err,data) {
+
+        var postList = JSON.parse(data);
+
+        findPostFromList(postName,postList.posts,function(post,index) {
+
+          var publishedDate = post.published;
+          var date = new Date(publishedDate).toLocaleString();
+          resolve(date);
+        })
+      })
     })
-    
-    var date = publishedDate
-    console.log('PUBLISHED DATE:',publishedDate);
-    return date;
+  },
+
+  getTemplateHelpers: function(postName) {
+
+    return new Promise( (resolve, reject)=> {
+
+      this.publishedDateFor(postName).then( (date)=> {
+
+        helpers.date = date;
+        resolve(helpers);
+      })
+    })
   }
 }

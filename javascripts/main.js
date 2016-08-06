@@ -16,6 +16,4 @@ window.onload = function() {
 }
 
 
-// list posts
-// preview post
-// add compiled templates folder
+// preview posts
