@@ -1,12 +1,13 @@
 welcome="\n ===============Welcome to blingy!===============\n"
-commandslist1="setup commands: <install>, <run>\n"
+commandslist1="setup commands: <install>, <refresh>, <run>\n"
 commandslist2="create commands: <new>, <publish>, <list>\n"
 commandslist3="remove commands: <unpublish>, <delete>\n"
 commandslist4="misc commands: <update-template>, <watch>\n"
 hr="================================================\n"
-start="  \n\n  ----------Getting Started: \n (run 'blingy install', then 'blingy run') \n\n"
+start="  \n\n  ----------Getting Started: \n\n"
 
 install=" [install]  \n Sets up blingy in current directory \n\n "
+refresh=" [refresh]  \n After updating your site.js for the first time, run install \n\n "
 run=" [run] (recommend running in a new tab) \n Run this command while you work and before you push to the outside world \n\t also lets you view your blog locally: http://127.0.0.1:9966 \n\n "
 
 workflow="\n\n  ----------Writing new articles: \n\n"
@@ -25,6 +26,8 @@ watch=" [watchjs] \n Watches main.js for any changes and browserifies it to bund
 case $1 in
     "install" )
         /usr/local/lib/node_modules/blingy/bin/client/install.sh ;;
+    "refresh" )
+        /usr/local/lib/node_modules/blingy/bin/client/init.sh ;;
     "unpublish" )
         /usr/local/lib/node_modules/blingy/bin/unpublish.sh $2 ;;
     "delete" )
@@ -42,7 +45,7 @@ case $1 in
     "update-template" )
         /usr/local/lib/node_modules/blingy/bin/update-template.sh ;;
     "help" )
-        echo $welcome $hr $start $install $run $workflow $new $publish $list $workflow2 $unpublish $remove $misc $template $watch " ------> Usage 'blingy <command>' <------ \n\n" $commandslist1 $commandslist2 $commandslist3 $commandslist4;;
+        echo $welcome $hr $start $install $refresh $run $workflow $new $publish $list $workflow2 $unpublish $remove $misc $template $watch " ------> Usage 'blingy <command>' <------ \n\n" $commandslist1 $commandslist2 $commandslist3 $commandslist4;;
     *)
         echo $welcome $hr " ------> Usage 'blingy <command>' <------ \n\n" $commandslist1 $commandslist2 $commandslist3 $commandslist4;;
 esac

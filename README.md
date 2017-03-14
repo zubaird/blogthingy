@@ -1,50 +1,59 @@
+## Blingy (v1.0.x-alpha)
 
------------------
-# This is a work in process
------------------
+### Static blog/site generator with markdown
 
-## Blingy
+  - Write blog articles in .md that gets published in HTML
+  - Use [handebarsjs](http://handlebarsjs.com/) in to your .md articles, includes useful helper commands like published date - `{{date}}`
+  - Create/Update custom templates and add your own styling/layouts, just remember to run `blingy update-template` when you're done
+  - CLI makes it easy to generate new drafts and publish them
 
-### A blog maker for
+### Todo
 
-  - Easy templating
-  - Markdown posts with Handbars ...because!
-  - Generators
+  - Create default template so it doesn't have that craigslist feel
+  - Write more helpful helper commands
 
-### Get started
+### Command Line Interface, usage `blingy <command>`
 
-  - Update this file: `./javascripts/site.js` with your information, then run: `blingy init`
+ - help commands: `<help>`
 
-  - Write your first post: `blingy-draft helloWorld!`
-    - Find it in `posts/helloWorld!.md`, and add some markdown.
+ - setup commands: `<install>, <refresh>, <run>`
 
-  - Turn it to HTML: `blingy-make helloWorld`
+ - create commands: `<new>, <publish>, <list>`
 
-  - View it locally: `blingy-run`
+ - remove commands: `<unpublish>, <delete>`
+
+ - misc commands:`<update-template>, <watch>`
+
+
+### Get started in CLI
+
+  - `npm install --g blingy`
+
+  - Terminal: `blingy install`
+
+  - Update this file: `./javascripts/site.js` with your information
+
+  - Terminal: `blingy refresh`
+
+  - After you write your first blog, `blingy run` in a new tab/window, then check it out in browser at http://127.0.0.1:9966
+
+### For command list in CLI just type `blingy`
+
+### Write your first blog article with blingy
+
+  - Terminal: `blingy new myPost`
+    - Find it in `posts/myPost.md`, and add some markdown.
+
+  - Turn it to HTML: `blingy publish myPost`
+
+  - View it locally: `blingy run`, then goto http://127.0.0.1:9966
 
   - Profit: (Let me know once you've figured that part out!)
 
-### Command Line Interface
-
-  `blingy-`
-
-  - compile: Compiles handlebars templates in the `./javascripts/templates` directory
-  - draft-post [POST NAME]: Generates a blank markdown post in `./posts` with a timestamp.
-  - pubish-post: turns post to HTML, compiles any handlebars, and publishes it.
-  - beefy: Watches working directory
-  - init: Init based on site.js config
-
-  - Unpublish me with `blingy unpublish someBlogPost`
-  - Remove me with `blingy remove someBlogPost`
-  - Create a draft post with `blingy draft [new post name]`
-  - List all draft posts with `blingy list-drafts`
-  - Publish a post with `blingy make [post name]`
-  - See changes locally with `blingy run`
-
-### Uses
+### Dependencies
 
   - Browserify (dealing with multiple JS files)
   - Watchify (watcher to update bundle.js on JS file changes)
   - Beefy (watch index.html for changes and serve locally)
   - Handlebars (templating and partials)
-  - Markdown to html
+  - Markdown
