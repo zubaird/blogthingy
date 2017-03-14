@@ -23,7 +23,7 @@ templates['posts'] = template({"1":function(container,depth0,helpers,partials,da
 
   return "  <hr>\n    "
     + ((stack1 = container.lambda(depth0, depth0)) != null ? stack1 : "")
-    + "\n";
+    + "\n    <hr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
