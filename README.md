@@ -7,11 +7,6 @@
   - Create/Update custom templates and add your own styling/layouts, just remember to run `blingy update-template` when you're done
   - CLI makes it easy to generate new drafts and publish them
 
-### Todo
-
-  - Create default template so it doesn't have that craigslist feel
-  - Write more helpful helper commands
-
 ### Command Line Interface, usage `blingy <command>`
 
  - help commands: `<help>`
@@ -57,3 +52,8 @@
   - Beefy (watch index.html for changes and serve locally)
   - Handlebars (templating and partials)
   - Markdown
+
+### Todo
+
+  - Create default template so it doesn't have that craigslist feel
+  - Write more helpful helper commands
