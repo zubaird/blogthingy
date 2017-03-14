@@ -1,6 +1,6 @@
 {
   "name": "blingy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "build blogs with MD and JavaScript!",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,14 @@
     "init": "bin/init.sh"
   },
   "bin": {
-    "blingy": "bin/init.sh"
+    "blingy install": "bin/client/install.sh",
+    "blingy unpublish someBlogPost": "bin/unpublish.sh",
+    "blingy remove someBlogPost": "bin/remove-post.sh",
+    "blingy draft [new post name]": "bin/draft-post.sh",
+    "blingy list-drafts": "bin/list-posts.sh",
+    "blingy make [post name]": "bin/publish-post.sh",
+    "blingy run": "bin/beefy.sh",
+    "blingy watchjs": "bin/watchify.sh",
   },
   "repository": {
     "type": "git",
