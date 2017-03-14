@@ -32,6 +32,6 @@ templates['posts'] = template({"1":function(container,depth0,helpers,partials,da
     + "</div>\n";
 },"useData":true});
 templates['sidebar'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<aside class=\"sidebar\">\n  sidebar\n</aside>\n";
+    return "<aside class=\"sidebar\">\n  sidebar stuff\n</aside>\n";
 },"useData":true});
 })();

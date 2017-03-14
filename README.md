@@ -13,26 +13,33 @@
 
 ### Get started
 
-  - Update this file: `./javascripts/site.js` with your information, then run: `npm run init`
+  - Update this file: `./javascripts/site.js` with your information, then run: `blingy init`
 
-  - Write your first post: `npm run draft-post helloWorld!`
+  - Write your first post: `blingy-draft helloWorld!`
     - Find it in `posts/helloWorld!.md`, and add some markdown.
 
-  - Turn it to HTML: `npm run publish-post helloWorld`
+  - Turn it to HTML: `blingy-make helloWorld`
 
-  - View it locally: `npm run beefy`
+  - View it locally: `blingy-run`
 
   - Profit: (Let me know once you've figured that part out!)
 
-### Commands
+### Command Line Interface
 
-  `npm run [command]`
+  `blingy-`
 
   - compile: Compiles handlebars templates in the `./javascripts/templates` directory
   - draft-post [POST NAME]: Generates a blank markdown post in `./posts` with a timestamp.
   - pubish-post: turns post to HTML, compiles any handlebars, and publishes it.
   - beefy: Watches working directory
   - init: Init based on site.js config
+
+  - Unpublish me with `blingy unpublish someBlogPost`
+  - Remove me with `blingy remove someBlogPost`
+  - Create a draft post with `blingy draft [new post name]`
+  - List all draft posts with `blingy list-drafts`
+  - Publish a post with `blingy make [post name]`
+  - See changes locally with `blingy run`
 
 ### Uses
 

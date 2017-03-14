@@ -1,5 +1,4 @@
 'use strict'
-require('locus');
 const fs = require('fs');
 const path = require('path');
 const Handlebars = require('handlebars');
