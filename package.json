@@ -1,6 +1,6 @@
 {
   "name": "blingy",
-  "version": "1.0.11-alpha",
+  "version": "1.0.111-alpha",
   "description": "build blogs with MD and JavaScript!",
   "main": "index.js",
   "scripts": {
