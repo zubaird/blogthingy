@@ -1,44 +1,44 @@
-var Handlebars = require('handlebars');
+const Handlebars = require('handlebars');
 
 module.exports = {
 
-  loadDomWith: function(query, template,templateData) {
-    var templateData = templateData || {};
+  loadDomWith(query, template, templateData) {
+    let templateData = templateData || {};
     document.querySelectorAll(query)[0].innerHTML = template(templateData);
   },
 
-  appendDomWith: function(query, template,templateData) {
-    var templateData = templateData || {};
-    var currentContent = document.querySelectorAll(query)[0].innerHTML
+  appendDomWith(query, template, templateData) {
+    let templateData = templateData || {};
+    let currentContent = document.querySelectorAll(query)[0].innerHTML;
     document.querySelectorAll(query)[0].innerHTML = currentContent += template(templateData);
   },
 
-  capitalize: function(word) {
-    return word[0].toUpperCase() + word.slice(1,word.length);
+  capitalize(word) {
+    return word[0].toUpperCase() + word.slice(1, word.length);
   },
 
-  loadAll: function() {
-    var templatesObj = {};
-    var templateList = this.templateList();
+  loadAll() {
+    const templatesObj = {};
+    const templateList = this.templateList();
 
-    for (var i = 0; i < templateList.length; i++) {
-      var templateKey = this.capitalize( templateList[i]);
-      templatesObj[ templateKey  ] = Handlebars.templates[ templateList[i] ];
+    for (let i = 0; i < templateList.length; i++) {
+      const templateKey = this.capitalize(templateList[i]);
+      templatesObj[templateKey] = Handlebars.templates[templateList[i]];
     }
 
     return templatesObj;
   },
 
-  templateList: function(){
+  templateList() {
     return Object.keys(Handlebars.templates);
   },
 
-  postList: function(){
-    var postNames = [];
-    var templateList = this.templateList();
+  postList() {
+    const postNames = [];
+    const templateList = this.templateList();
 
-    for (var i = 0; i < templateList.length; i++) {
-      if (templateList[i].search("_") !== -1) {
+    for (let i = 0; i < templateList.length; i++) {
+      if (templateList[i].search('_') !== -1) {
         postNames.push(templateList[i]);
       }
     }
@@ -46,23 +46,23 @@ module.exports = {
     return postNames;
   },
 
-  loadPosts: function(numberOfPosts, template) {
-    var postList = this.postList();
-    var postCount;
+  loadPosts(numberOfPosts, template) {
+    const postList = this.postList();
+    let postCount;
 
-    if (postList.length > numberOfPosts ) {
+    if (postList.length > numberOfPosts) {
       postCount = numberOfPosts;
     } else {
       postCount = postList.length;
     }
 
-    var postContent = [];
+    const postContent = [];
 
-    for (var i = 0; i < postCount; i++) {
-      var post = postList[i]
-      postContent.push( template[post]() )
+    for (let i = 0; i < postCount; i++) {
+      const post = postList[i];
+      postContent.push(template[post]());
     }
 
     return postContent;
-  }
-}
+  },
+};

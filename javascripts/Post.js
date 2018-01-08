@@ -1,28 +1,26 @@
-'use strict'
 const fs = require('fs');
-const path = require('path');
 const Handlebars = require('handlebars');
 const postHelpers = require(`${__dirname}/post_helpers`);
 const markdown = require('markdown').markdown;
 
 const PostMethods = {
 
-  stampedName: function (postName, stamp) {
-    return stamp + '_' + postName + '.md';
+  stampedName(postName, stamp) {
+    return `${stamp}_${postName}.md`;
   },
 
-  makeTimestamp: function () {
+  makeTimestamp() {
     return Date.parse(new Date());
   },
 
-  fullPath: function (path, stampedName) {
+  fullPath(path, stampedName) {
     return path + stampedName;
   },
 
-  writeToPostsList: function (thisFile, stampedName, stamp) {
+  writeToPostsList(thisFile, stampedName, stamp) {
     return new Promise((resolve, reject) => {
-      fs.readFile(thisFile, 'utf8', function (err, data) {
-        let postsData = JSON.parse(data);
+      fs.readFile(thisFile, 'utf8', (err, data) => {
+        const postsData = JSON.parse(data);
 
         postsData.posts.push({
           name: stampedName,
@@ -32,9 +30,9 @@ const PostMethods = {
           categories: [],
         });
 
-        let writableData = JSON.stringify(postsData);
+        const writableData = JSON.stringify(postsData);
 
-        fs.writeFile(thisFile, writableData, function (err) {
+        fs.writeFile(thisFile, writableData, (err) => {
           if (err) {
             throw err;
           }
@@ -45,50 +43,50 @@ const PostMethods = {
     });
   },
 
-  removeTimestampAndType: function (name) {
+  removeTimestampAndType(name) {
     const NAMEMATCH = /_([^\.]+)/;
-    let matches = name.split(NAMEMATCH);;
-    return matches[1]
+    const matches = name.split(NAMEMATCH);
+    return matches[1];
   },
 
-  findPostFromList: function(name, list, cb) {
-    for (var i = 0; i < list.length; i++) {
-      let postFromList = PostMethods.removeTimestampAndType(list[i].name);
+  findPostFromList(name, list, cb) {
+    for (let i = 0; i < list.length; i++) {
+      const postFromList = PostMethods.removeTimestampAndType(list[i].name);
       if (name === postFromList) {
         cb(list[i], i);
       }
     }
   },
 
-  findFullNamePostFromList: function (name, list, cb) {
-    for (var i = 0; i < list.length; i++) {
-      let postFromList = list[i].name;
+  findFullNamePostFromList(name, list, cb) {
+    for (let i = 0; i < list.length; i++) {
+      const postFromList = list[i].name;
       if (name === postFromList) {
         cb(list[i], i);
       }
     }
   },
 
-  handleError: function (err) {
+  handleError(err) {
     if (err) {
       throw err;
     }
   },
 
-  removeFromJSON: function (name) {
+  removeFromJSON(name) {
     return new Promise((resolve, reject) => {
-      let file = './postsList.json';
+      const file = './postsList.json';
 
-      fs.readFile(file, 'utf8', function (err, data) {
-        let postsList = JSON.parse(data);
-        let posts = postsList.posts;
+      fs.readFile(file, 'utf8', (err, data) => {
+        const postsList = JSON.parse(data);
+        const posts = postsList.posts;
         let updatedContent;
 
-        PostMethods.findPostFromList(name, posts, function (post, index) {
+        PostMethods.findPostFromList(name, posts, (post, index) => {
           posts.splice(index, 1);
           updatedContent = JSON.stringify(postsList);
 
-          fs.writeFile(file, updatedContent, function (err) {
+          fs.writeFile(file, updatedContent, (err) => {
             if (err) {
               console.error('line 82 error Post.js', err);
               reject(err);
@@ -101,18 +99,18 @@ const PostMethods = {
     });
   },
 
-  deleteMDFile: function (name) {
+  deleteMDFile(name) {
     return new Promise((resolve, reject) => {
-      let file = './postsList.json';
+      const file = './postsList.json';
 
-      fs.readFile(file, 'utf8', function (err, data) {
-        let postsList = JSON.parse(data);
-        let posts = postsList.posts;
+      fs.readFile(file, 'utf8', (err, data) => {
+        const postsList = JSON.parse(data);
+        const posts = postsList.posts;
         let path;
 
-        PostMethods.findPostFromList(name, posts, function (post, index) {
-          path = './posts/' + post.name;
-          fs.unlink(path, function (err) {
+        PostMethods.findPostFromList(name, posts, (post, index) => {
+          path = `./posts/${post.name}`;
+          fs.unlink(path, (err) => {
             if (err) {
               console.error(err);
               reject(err);
@@ -121,26 +119,24 @@ const PostMethods = {
             resolve();
           });
         });
-
       });
     });
   },
 
-  deleteHTMLFile: function (name) {
+  deleteHTMLFile(name) {
     return new Promise((resolve, reject) => {
-      let file = './postsList.json';
+      const file = './postsList.json';
 
-      fs.readFile(file, 'utf8', function (err, data) {
-        let postsList = JSON.parse(data);
-        let posts = postsList.posts;
+      fs.readFile(file, 'utf8', (err, data) => {
+        const postsList = JSON.parse(data);
+        const posts = postsList.posts;
         let path;
 
-        PostMethods.findPostFromList(name, posts, function (post, index) {
-
-          let normalizedName = post.name.slice(0, post.name.length - 3);
-          let htmlFile = `./posts/html/${normalizedName}.html`;
+        PostMethods.findPostFromList(name, posts, (post, index) => {
+          const normalizedName = post.name.slice(0, post.name.length - 3);
+          const htmlFile = `./posts/html/${normalizedName}.html`;
           console.log(htmlFile);
-          fs.unlink(htmlFile, function (err) {
+          fs.unlink(htmlFile, (err) => {
             if (err) {
               console.error(err);
               reject(err);
@@ -149,41 +145,37 @@ const PostMethods = {
             resolve();
           });
         });
-
       });
     });
   },
 };
 
-const Post  = {
-  newDraft: function (draftName) {
+const Post = {
+  newDraft(draftName) {
     return new Promise((resolve, reject) => {
-      let content = '# Title \n*Published on: {{date}}*\n',
-          stamp = PostMethods.makeTimestamp(),
-          stampedName = PostMethods.stampedName(draftName, stamp),
-          fullPath = PostMethods.fullPath('./posts/', stampedName);
+      const content = '# Title \n*Published on: {{date}}*\n'
+      const stamp = PostMethods.makeTimestamp()
+      const stampedName = PostMethods.stampedName(draftName, stamp)
+      const fullPath = PostMethods.fullPath('./posts/', stampedName);
 
       fs.writeFile(fullPath, content, (err) => {
         PostMethods.writeToPostsList('./postsList.json', stampedName, stamp).then(() => {
           resolve(err);
         });
       });
-
     });
   },
 
-  remove: function (postName) {
-    let stepOne = PostMethods.removeFromJSON(postName);
-    let stepTwo = PostMethods.deleteMDFile(postName);
+  remove(postName) {
+    const stepOne = PostMethods.removeFromJSON(postName);
+    const stepTwo = PostMethods.deleteMDFile(postName);
     return Promise.all([stepOne, stepTwo]);
   },
 
-  find: function (postName) {
-    return new Promise((resolve, reject)=> {
-
+  find(postName) {
+    return new Promise((resolve, reject) => {
       fs.readFile('./postsList.json', 'utf8', (err, data) => {
-
-        let posts = JSON.parse(data).posts;
+        const posts = JSON.parse(data).posts;
         if (err) {
           reject(err);
         }
@@ -195,25 +187,25 @@ const Post  = {
     });
   },
 
-  all: function () {
+  all() {
     return new Promise((resolve, reject) => {
       fs.readFile('./postsList.json', 'utf8', (err, data) => {
-        let posts = JSON.parse(data).posts;
+        const posts = JSON.parse(data).posts;
         err ? reject(err) : resolve(posts);
       });
     });
   },
 
-  readPostListFile: function () {
+  readPostListFile() {
     return new Promise((resolve, reject) => {
       fs.readFile('./postsList.json', 'utf8', (err, data) => {
-        let file = JSON.parse(data);
+        const file = JSON.parse(data);
         err ? reject(err) : resolve(file);
       });
     });
   },
 
-  writeToPostListFile: function (content) {
+  writeToPostListFile(content) {
     return new Promise((resolve, reject) => {
       fs.writeFile('./postsList.json', content, (err) => {
         if (err) {
@@ -225,31 +217,26 @@ const Post  = {
     });
   },
 
-  updatePost: function (postName) {
-
+  updatePost(postName) {
     return new Promise((resolve, reject) => {
-
-      this.find(postName).then((post)=> {
+      this.find(postName).then((post) => {
         resolve();
       });
     });
   },
 
-  addToPostsList: function (postName) {
+  addToPostsList(postName) {
     return new Promise((resolve, reject) => {
-
-      this.readPostListFile().then((file)=> {
-
-        let posts = file.posts;
-        PostMethods.findPostFromList(postName, posts, (post, index)=> {
-
+      this.readPostListFile().then((file) => {
+        const posts = file.posts;
+        PostMethods.findPostFromList(postName, posts, (post, index) => {
           post.published = new Date();
           file.posts = posts;
-          let updatedContent = JSON.stringify(file);
+          const updatedContent = JSON.stringify(file);
 
-          this.writeToPostListFile(updatedContent).then(()=> {
+          this.writeToPostListFile(updatedContent).then(() => {
             resolve(post.published);
-          }).catch((err)=> {
+          }).catch((err) => {
             reject(err);
           });
         });
@@ -257,21 +244,19 @@ const Post  = {
     });
   },
 
-  toHTML: function (postName) {
+  toHTML(postName) {
     return new Promise((resolve, reject) => {
+      this.readPostListFile().then((file) => {
+        const posts = file.posts;
+        PostMethods.findPostFromList(postName, posts, (post, index) => {
+          const normalizedName = post.name.slice(0, post.name.length - 3);
+          const mdFile = `./posts/${post.name}`;
+          const htmlFile = `./posts/html/${normalizedName}.html`;
 
-      this.readPostListFile().then((file)=> {
-        let posts = file.posts;
-        PostMethods.findPostFromList(postName, posts, (post, index)=> {
-          let normalizedName = post.name.slice(0, post.name.length - 3);
-          let mdFile = `./posts/${post.name}`;
-          let htmlFile = `./posts/html/${normalizedName}.html`;
-
-          fs.readFile(mdFile, 'utf8', function (err, data) {
-
-            postHelpers.getTemplateHelpers(postName).then((helpers)=> {
-              let template = Handlebars.compile(data)(helpers);
-              let htmlContent = markdown.toHTML(template);
+          fs.readFile(mdFile, 'utf8', (err, data) => {
+            postHelpers.getTemplateHelpers(postName).then((helpers) => {
+              const template = Handlebars.compile(data)(helpers);
+              const htmlContent = markdown.toHTML(template);
 
               fs.writeFile(htmlFile, htmlContent, (err) => {
                 err ? reject(err) : resolve(htmlContent);
@@ -283,23 +268,21 @@ const Post  = {
     });
   },
 
-  unpublish: function (postName) {
-    return new Promise((resolve, reject)=> {
-      this.readPostListFile().then((file)=> {
-
-        let posts = file.posts;
-        PostMethods.findPostFromList(postName, posts, (post, index)=> {
-
+  unpublish(postName) {
+    return new Promise((resolve, reject) => {
+      this.readPostListFile().then((file) => {
+        const posts = file.posts;
+        PostMethods.findPostFromList(postName, posts, (post, index) => {
           post.published = false;
 
-          let updatedContent = JSON.stringify(file);
+          const updatedContent = JSON.stringify(file);
 
           fs.writeFile('./postsList.json', updatedContent, (err) => {
             if (err) {
               reject(err);
             }
 
-            PostMethods.deleteHTMLFile(postName).then(()=> {
+            PostMethods.deleteHTMLFile(postName).then(() => {
               resolve(updatedContent);
             });
           });

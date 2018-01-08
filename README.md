@@ -37,7 +37,8 @@
 ### Write your first blog article with blingy
 
   - Terminal: `blingy new myPost`
-    - Find it in `posts/myPost.md`, and add some markdown.
+
+  - Find it in `posts/myPost.md`, and add some markdown.
 
   - Turn it to HTML: `blingy publish myPost`
 

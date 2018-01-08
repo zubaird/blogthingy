@@ -45,7 +45,7 @@ case $1 in
     "update-template" )
         /usr/local/lib/node_modules/blingy/bin/update-template.sh ;;
     "help" )
-        echo $welcome $hr $start $install $refresh $run $workflow $new $publish $list $workflow2 $unpublish $remove $misc $template $watch " ------> Usage 'blingy <command>' <------ \n\n" $commandslist1 $commandslist2 $commandslist3 $commandslist4;;
+        echo $welcome $hr " ------> Usage 'blingy <command>' <------ \n\n" $commandslist1 $commandslist2 $commandslist3 $commandslist4 $hr $start $install $refresh $run $workflow $new $publish $list $workflow2 $unpublish $remove $misc $template $watch;;
     *)
         echo $welcome $hr " ------> Usage 'blingy <command>' <------ \n\n" $commandslist1 $commandslist2 $commandslist3 $commandslist4;;
 esac
